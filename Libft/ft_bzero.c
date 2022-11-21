@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_bzero.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/10/11 11:03:30 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/14 13:54:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
 
-int	print_char(char c)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	ft_memset(s, '\0', n);
+}
+
+/* 
+The bzero() function writes n zeroed bytes to the string s.  
+If n is zero, bzero() does nothing.
+
+	unsigned char	*c;
+	size_t			i;
 
 	i = 0;
-	write(1, &c, 1);
-	i++;
-	return (i);
-}
+	c = s;
+	while (i < n)
+	{
+		c[i] = '\0';
+		i++;
+	}
+*/

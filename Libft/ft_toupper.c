@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_toupper.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/10/11 18:46:52 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/11 16:13:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-int	print_char(char c)
+int	ft_toupper(int c)
 {
-	int	i;
-
-	i = 0;
-	write(1, &c, 1);
-	i++;
-	return (i);
+	if (c >= 'a' && c <= 'z')
+	{
+		c = c - 32;
+	}
+	return (c);
 }

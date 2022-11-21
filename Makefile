@@ -6,7 +6,7 @@
 #    By: dreijans <dreijans@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/15 18:56:16 by dreijans      #+#    #+#                  #
-#    Updated: 2022/11/18 18:16:05 by dreijans      ########   odam.nl          #
+#    Updated: 2022/11/21 18:57:39 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ SRC = \
 ft_printf.c \
 print_char.c \
 print_nbr.c \
+print_hexlow.c \
+print_hexup.c 
 OBJ_FILES = $(SRC:.c=.o)
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 #LIBFT_OBJ = $(LIBDIR:.c=.o) 
 LIB = $(LIBDIR)/libft.a
-LIBDIR = ../Libft
+LIBDIR = Libft
 
 #dit werkt niet gewoon al je .c files etc handmatig erbij zetten!!!!!
 .PHONY: all clear fclean re test
@@ -42,8 +44,8 @@ clean:
 
 fclean: 
 		rm -f $(OBJ_FILES)
-		rm -f $(NAME)
-		$(MAKE) -C $(LIBDIR) fclean
+		rm -f $(NAME) ./a.out 
+		$(MAKE) -C $(LIBDIR) fclean  
 
 re: fclean all
 

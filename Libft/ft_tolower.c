@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_tolower.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/10/11 19:15:59 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/11 16:13:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-int	print_char(char c)
+int	ft_tolower(int c)
 {
-	int	i;
-
-	i = 0;
-	write(1, &c, 1);
-	i++;
-	return (i);
+	if (c >= 'A' && c <= 'Z')
+	{
+		c = c +32;
+	}
+	return (c);
 }

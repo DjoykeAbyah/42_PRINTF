@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_isalnum.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/10/05 14:53:32 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/11 15:58:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-int	print_char(char c)
+int	ft_isalnum(int c)
 {
-	int	i;
-
-	i = 0;
-	write(1, &c, 1);
-	i++;
-	return (i);
+	if (c >= '0' && c <= '9')
+	{
+		return (1);
+	}
+	else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
+
+/*int main(void)
+{
+	printf("%i\n", ft_isalnum(';'));
+	printf("%i\n", isalnum(';'));
+}*/

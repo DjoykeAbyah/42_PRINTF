@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_lstadd_back.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/11/17 15:12:38 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/17 15:12:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
 
-int	print_char(char c)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	i;
+	t_list	*back;
 
-	i = 0;
-	write(1, &c, 1);
-	i++;
-	return (i);
+	if (*lst)
+	{
+		back = ft_lstlast(*lst);
+		back->next = new;
+	}
+	else
+	{
+		*lst = new;
+	}
 }
+
+/*
+Parameters:
+lst: The address of a pointer
+to the first link of a list.
+new: The address of a pointer
+to the node to be added to the list.
+
+Description:
+Adds the node ’new’ at the end of the list.
+*/

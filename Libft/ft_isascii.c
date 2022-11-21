@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_isascii.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/10/05 18:40:23 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/11 16:38:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-int	print_char(char c)
+int	ft_isascii(int c)
 {
-	int	i;
-
-	i = 0;
-	write(1, &c, 1);
-	i++;
-	return (i);
+	if (c >= 0 && c <= 127)
+	{
+		return (1);
+	}
+	return (0);
 }
+
+/*
+The isascii() function tests for an ASCII character
+which is any character between 0 and octal 0177 inclusive
+*/

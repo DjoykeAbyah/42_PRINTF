@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/16 19:59:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/18 18:16:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2022/11/21 18:57:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_printf(const char *format, ...)
 	va_list		arg;
 	int			count;
 	char		*string;
+	int			len;
 
 	i = 0;
 	count = 0;
@@ -28,35 +29,42 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
+			//printf("%c\n", format[i]);
 			if (format[i] == 'c')
 			{
 				c = va_arg(arg, unsigned int);
 				count += write(1, &c, 1);
 			}
 			else if (format[i] == 's')
-				count += write(1, va_arg(arg, char *), ft_strlen(string));
-			// if (format[i + 1] == 'p')
+			{
+				string = va_arg(arg, char *);
+				len = ft_strlen(string);
+				count += write(1, string, len);	
+			}
+			// if (format[i] == 'p')
 			// {
 			// }
-			// if (format[i + 1] == 'd')
+			// if (format[i] == 'd')
 			// {
 			// }
 			else if (format[i] == 'i')
 				count += print_nbr(va_arg(arg, int), 1);
-			// if (format[i + 1] == 'u')
+			// if (format[i] == 'u')
 			// {
 			// }
-			// if (format[i + 1] == 'x')
-			// {
-			// }
-			// if (format[i + 1] == 'X')
-			// {
-			// }
+			else if (format[i] == 'x')
+			{
+				count += print_hexlow(va_arg(arg, unsigned int));
+			}
+			if (format[i] == 'X')
+			{
+				count += print_hexup(va_arg(arg, unsigned int));
+			}
 			else if (format[i] == '%')
-				count += print_char('%', 1);
+				count += print_char('%');
 		}
 		else
-			ft_putchar_fd(format[i], 1);
+			count += print_char(format[i]);
 		i++;
 	}
 	va_end (arg);
@@ -71,15 +79,15 @@ Don’t implement the buffer management of the original printf().
 Using the libtool command is forbidden.
 • Your libftprintf.a has to be created at the root of your repository
 
-  %c Prints a single character.
-• %s Prints a string (as defined by the common C convention).
+  %c Prints a single character. X
+• %s Prints a string (as defined by the common C convention). X
 • %p The void * pointer argument has to be printed in hexadecimal format.
-• %d Prints a decimal (base 10) number.
-• %i Prints an integer in base 10.
-• %u Prints an unsigned decimal (base 10) number.
+• %d Prints a decimal (base 10) number. X
+• %i Prints an integer in base 10. X
+• %u Prints an unsigned decimal (base 10) number. 
 • %x Prints a number in hexadecimal (base 16) lowercase format.
 • %X Prints a number in hexadecimal (base 16) uppercase format.
-• %% Prints a percent sign.
+• %% Prints a percent sign. X
 
 va_start function
 is a macro defined 

@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_lstsize.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/11/17 15:14:32 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/17 15:14:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
 
-int	print_char(char c)
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
 	i = 0;
-	write(1, &c, 1);
-	i++;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
 	return (i);
 }
+
+/*
+Parameters:
+lst: The beginning of the list.
+
+Return value:
+The length of the list
+
+Description Counts the number of nodes in a list.
+*/

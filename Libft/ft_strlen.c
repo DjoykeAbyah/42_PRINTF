@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_strlen.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/10/10 11:53:32 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/16 18:00:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include <stddef.h>
 
-int	print_char(char c)
+size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	write(1, &c, 1);
-	i++;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
 	return (i);
 }
+
+/*
+i[0] till end includes \0
+really needed to put extra condition of \0
+
+description
+the length of the string s. 
+never scans beyond the first maxlen bytes of s.
+
+return:
+number of characters that precede the terminating NUL character
+*/

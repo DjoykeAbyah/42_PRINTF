@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_char.c                                       :+:    :+:            */
+/*   ft_isprint.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 18:08:14 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 14:19:25 by dreijans      ########   odam.nl         */
+/*   Created: 2022/10/10 10:46:19 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/11 15:59:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
-int	print_char(char c)
+int	ft_isprint(int c)
 {
-	int	i;
-
-	i = 0;
-	write(1, &c, 1);
-	i++;
-	return (i);
+	if (c >= 32 && c <= 126)
+	{
+		return (1);
+	}
+	return (0);
 }
+
+/*
+tests for any printing character, including space (` ').  
+The value of the argument must be representable as an unsigned char or the
+value of EOF.
+*/
