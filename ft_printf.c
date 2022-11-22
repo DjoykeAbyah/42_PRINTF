@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/16 19:59:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 18:57:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2022/11/22 16:55:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			//printf("%c\n", format[i]);
 			if (format[i] == 'c')
 			{
 				c = va_arg(arg, unsigned int);
@@ -41,25 +40,22 @@ int	ft_printf(const char *format, ...)
 				len = ft_strlen(string);
 				count += write(1, string, len);	
 			}
-			// if (format[i] == 'p')
-			// {
-			// }
-			// if (format[i] == 'd')
-			// {
-			// }
+			if (format[i] == 'p')
+			{
+				string = va_arg(arg, char *);
+				len = ft_strlen(string);
+				count += write(1, &string, len);
+			}
+			else if (format[i] == 'd')
+				count += print_nbr(va_arg(arg, int), 1);
 			else if (format[i] == 'i')
 				count += print_nbr(va_arg(arg, int), 1);
-			// if (format[i] == 'u')
-			// {
-			// }
+			else if (format[i] == 'u')
+				count += print_nbr(va_arg(arg, int), 1);
 			else if (format[i] == 'x')
-			{
 				count += print_hexlow(va_arg(arg, unsigned int));
-			}
-			if (format[i] == 'X')
-			{
+			else if (format[i] == 'X')
 				count += print_hexup(va_arg(arg, unsigned int));
-			}
 			else if (format[i] == '%')
 				count += print_char('%');
 		}
@@ -84,9 +80,9 @@ Using the libtool command is forbidden.
 • %p The void * pointer argument has to be printed in hexadecimal format.
 • %d Prints a decimal (base 10) number. X
 • %i Prints an integer in base 10. X
-• %u Prints an unsigned decimal (base 10) number. 
-• %x Prints a number in hexadecimal (base 16) lowercase format.
-• %X Prints a number in hexadecimal (base 16) uppercase format.
+• %u Prints an unsigned decimal (base 10) number. X
+• %x Prints a number in hexadecimal (base 16) lowercase format. X
+• %X Prints a number in hexadecimal (base 16) uppercase format. X
 • %% Prints a percent sign. X
 
 va_start function
