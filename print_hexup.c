@@ -6,17 +6,21 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/21 18:55:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 18:59:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2022/11/24 13:25:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 static int	howmuch(unsigned int a)
 {
 	int	i;
 
 	i = 0;
+	if (a == 0)
+	{
+		i++;
+	}
 	while (a != 0)
 	{
 		a = a / 16;
@@ -25,11 +29,8 @@ static int	howmuch(unsigned int a)
 	return (i);
 }
 
-static int	put_hexup(unsigned int n)
+static int	put_hexup(unsigned long int n)
 {
-	unsigned long	j;
-
-	j = (unsigned long) n;
 	if ((n / 16) != 0)
 		put_hexup(n / 16);
 	if ((n % 16) < 10)

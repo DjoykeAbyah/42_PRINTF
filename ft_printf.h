@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_nbr.c                                        :+:    :+:            */
+/*   ft_printf.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/18 16:39:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/23 19:57:26 by dreijans      ########   odam.nl         */
+/*   Created: 2022/11/23 19:56:37 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/24 13:22:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-static int	howmuch(int a)
-{
-	int	i;
+# include "./libft/libft.h"
+# include <unistd.h>
+# include <stdarg.h>
 
-	i = 0;
-	if (a <= 0)
-		i = i + 1;
-	while (a != 0)
-	{
-		a = a / 10;
-		i++;
-	}
-	return (i);
-}
+int	ft_printf(const char *format, ...);
+int	print_nbr(int n, int fd);
+int	print_char(char c);
+int	print_hexlow(unsigned int n);
+int	print_hexup(unsigned int n);
+int	print_str(char *s);
+int	print_unsigned(unsigned int n, int fd);
+int	print_pointer(unsigned long int n);
 
-int	print_nbr(int n, int fd)
-{
-	int	count;
-
-	count = howmuch(n);
-	ft_putnbr_fd(n, fd);
-	return (count);
-}
+#endif

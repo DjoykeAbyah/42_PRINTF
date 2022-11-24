@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_hexlow.c                                     :+:    :+:            */
+/*   print_pointer.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/21 18:54:57 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/24 13:23:27 by dreijans      ########   odam.nl         */
+/*   Created: 2022/11/24 13:19:50 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/24 13:20:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	howmuch(unsigned int a)
+static int	howmuch(unsigned long int a)
 {
 	int	i;
 
@@ -29,10 +29,10 @@ static int	howmuch(unsigned int a)
 	return (i);
 }
 
-static int	put_hexlow(unsigned int n)
+static int	put_pointer(unsigned long int n)
 {
 	if ((n / 16) != 0)
-		put_hexlow(n / 16);
+		put_pointer(n / 16);
 	if ((n % 16) < 10)
 	{
 		print_char((n % 16) + 48);
@@ -44,15 +44,11 @@ static int	put_hexlow(unsigned int n)
 	return (n);
 }
 
-int	print_hexlow(unsigned int n)
+int	print_pointer(unsigned long int n)
 {
 	int	count;
 
 	count = howmuch(n);
-	put_hexlow(n);
+	put_pointer(n);
 	return (count);
 }
-
-/*
-why do i get LONG max/min errors when i put long in the function and now i don't?
-*/

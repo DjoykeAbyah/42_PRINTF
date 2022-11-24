@@ -6,62 +6,50 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/16 19:59:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/22 16:55:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2022/11/24 13:21:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
+
+static int	check_format(va_list arg, char s)
+{
+	if (s == 'c')
+		return (print_char(va_arg(arg, unsigned int)));
+	else if (s == 's')
+		return (print_str(va_arg(arg, char *)));
+	else if (s == 'd' || s == 'i')
+		return (print_nbr(va_arg(arg, int), 1));
+	else if (s == 'u')
+		return (print_unsigned(va_arg(arg, int), 1));
+	else if (s == 'x')
+		return (print_hexlow(va_arg(arg, unsigned long int)));
+	else if (s == 'X')
+		return (print_hexup(va_arg(arg, unsigned long int)));
+	else if (s == '%')
+		return (print_char('%'));
+	else if (s == 'p')
+		return (print_str("0x") + print_pointer(va_arg(arg, unsigned long int)));
+	return (0);
+}
 
 int	ft_printf(const char *format, ...)
 {
-	int			i;
-	char		c;
-	va_list		arg;
 	int			count;
-	char		*string;
-	int			len;
+	va_list		arg;
 
-	i = 0;
 	count = 0;
 	va_start(arg, format);
-	while (format[i] != '\0')
+	while (*format != '\0')
 	{
-		if (format[i] == '%')
+		if (*format == '%' && *(format + 1) != '\0')
 		{
-			i++;
-			if (format[i] == 'c')
-			{
-				c = va_arg(arg, unsigned int);
-				count += write(1, &c, 1);
-			}
-			else if (format[i] == 's')
-			{
-				string = va_arg(arg, char *);
-				len = ft_strlen(string);
-				count += write(1, string, len);	
-			}
-			if (format[i] == 'p')
-			{
-				string = va_arg(arg, char *);
-				len = ft_strlen(string);
-				count += write(1, &string, len);
-			}
-			else if (format[i] == 'd')
-				count += print_nbr(va_arg(arg, int), 1);
-			else if (format[i] == 'i')
-				count += print_nbr(va_arg(arg, int), 1);
-			else if (format[i] == 'u')
-				count += print_nbr(va_arg(arg, int), 1);
-			else if (format[i] == 'x')
-				count += print_hexlow(va_arg(arg, unsigned int));
-			else if (format[i] == 'X')
-				count += print_hexup(va_arg(arg, unsigned int));
-			else if (format[i] == '%')
-				count += print_char('%');
+			format++;
+			count += check_format(arg, *format);
 		}
 		else
-			count += print_char(format[i]);
-		i++;
+			count += print_char(*format);
+	format++;
 	}
 	va_end (arg);
 	return (count);
@@ -77,12 +65,12 @@ Using the libtool command is forbidden.
 
   %c Prints a single character. X
 • %s Prints a string (as defined by the common C convention). X
-• %p The void * pointer argument has to be printed in hexadecimal format.
+• %p The void * pointer argument has to be printed in hexadecimal *format. X
 • %d Prints a decimal (base 10) number. X
 • %i Prints an integer in base 10. X
 • %u Prints an unsigned decimal (base 10) number. X
-• %x Prints a number in hexadecimal (base 16) lowercase format. X
-• %X Prints a number in hexadecimal (base 16) uppercase format. X
+• %x Prints a number in hexadecimal (base 16) lowercase *format. X
+• %X Prints a number in hexadecimal (base 16) uppercase *format. X
 • %% Prints a percent sign. X
 
 va_start function
@@ -117,4 +105,6 @@ If va_end is not called before returning from the function,
 the result is undefined.
 ap − This is the va_list object previously 
 initialized by va_start in the same function.
+
+ar -tv libftprintf.a checks .a file!
 */

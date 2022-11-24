@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_hexlow.c                                     :+:    :+:            */
+/*   print_unsigned.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/21 18:54:57 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/24 13:23:27 by dreijans      ########   odam.nl         */
+/*   Created: 2022/11/23 12:43:37 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/23 20:17:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,32 @@ static int	howmuch(unsigned int a)
 	int	i;
 
 	i = 0;
-	if (a == 0)
-	{
-		i++;
-	}
+	if (a <= 0)
+		i = i + 1;
 	while (a != 0)
 	{
-		a = a / 16;
+		a = a / 10;
 		i++;
 	}
 	return (i);
 }
 
-static int	put_hexlow(unsigned int n)
+static void	change_nbr(unsigned int n, int fd)
 {
-	if ((n / 16) != 0)
-		put_hexlow(n / 16);
-	if ((n % 16) < 10)
-	{
-		print_char((n % 16) + 48);
-	}
+	if (n < 10)
+		ft_putchar_fd(n + '0', fd);
 	else
 	{
-		print_char((n % 16) + 87);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
-	return (n);
 }
 
-int	print_hexlow(unsigned int n)
+int	print_unsigned(unsigned int n, int fd)
 {
 	int	count;
 
 	count = howmuch(n);
-	put_hexlow(n);
+	change_nbr(n, fd);
 	return (count);
 }
-
-/*
-why do i get LONG max/min errors when i put long in the function and now i don't?
-*/

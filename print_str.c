@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   printf.h                                           :+:    :+:            */
+/*   print_str.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/16 15:20:56 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/21 18:56:11 by dreijans      ########   odam.nl         */
+/*   Created: 2022/11/23 12:08:54 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/11/24 11:37:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#include "ft_printf.h"
 
-# include "../Libft/libft.h"
-# include <unistd.h>
-# include <stdarg.h>
-# include <stdio.h>
+int	print_str(char *s)
+{
+	if (s == '\0')
+	{
+		return (write (1, "(null)", 6));
+	}
+	else
+		return (write (1, s, ft_strlen(s)));
+}
 
-int	ft_printf(const char *, ...);
-int	print_nbr(int n, int fd);
-int	print_char(char c);
-int	print_hexlow(unsigned int n);
-int	print_hexup(unsigned int n);
-
-#endif
+/*
+write returns how much it wrote
+*/
