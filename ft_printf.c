@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/16 19:59:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/24 13:21:05 by dreijans      ########   odam.nl         */
+/*   Created: 2022/11/25 13:16:27 by dreijans      #+#    #+#                 */
+/*   Updated: 2022/12/05 13:52:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,46 @@ static int	check_format(va_list arg, char s)
 	else if (s == 's')
 		return (print_str(va_arg(arg, char *)));
 	else if (s == 'd' || s == 'i')
-		return (print_nbr(va_arg(arg, int), 1));
+		return (print_nbr(va_arg(arg, int)));
 	else if (s == 'u')
-		return (print_unsigned(va_arg(arg, int), 1));
-	else if (s == 'x')
-		return (print_hexlow(va_arg(arg, unsigned long int)));
+		return (print_unsigned(va_arg(arg, unsigned int)));
+	else if (s == 'x' || s == 'X')
+		return (print_hexlow(va_arg(arg, unsigned int)));
 	else if (s == 'X')
-		return (print_hexup(va_arg(arg, unsigned long int)));
+		return (print_hexup(va_arg(arg, unsigned int)));
 	else if (s == '%')
 		return (print_char('%'));
 	else if (s == 'p')
-		return (print_str("0x") + print_pointer(va_arg(arg, unsigned long int)));
-	return (0);
+		return (print_ptr(va_arg(arg, unsigned long int)));
+	return (-1);
+}
+
+static int	check_minus(const char *format, va_list arg, int *count)
+{
+	int			nbr;
+
+	while (*format != '\0')
+	{
+		if (*format == '%' && *(format + 1) != '\0')
+		{
+			format++;
+			nbr = check_format(arg, *format);
+			if (nbr == -1)
+				return (-1);
+			*count = *count + nbr;
+		}
+		else
+		{
+			if (*format != '%')
+			{
+				if (print_char(*format) == -1)
+					return (-1);
+				*count = *count + 1;
+			}
+		}
+		format++;
+	}
+	return (*count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -40,17 +68,7 @@ int	ft_printf(const char *format, ...)
 
 	count = 0;
 	va_start(arg, format);
-	while (*format != '\0')
-	{
-		if (*format == '%' && *(format + 1) != '\0')
-		{
-			format++;
-			count += check_format(arg, *format);
-		}
-		else
-			count += print_char(*format);
-	format++;
-	}
+	count = check_minus(format, arg, &count);
 	va_end (arg);
 	return (count);
 }

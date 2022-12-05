@@ -6,13 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/23 12:43:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/23 20:17:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2022/12/05 13:56:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	howmuch(unsigned int a)
+static int	how_much(unsigned int a)
 {
 	int	i;
 
@@ -27,22 +27,38 @@ static int	howmuch(unsigned int a)
 	return (i);
 }
 
-static void	change_nbr(unsigned int n, int fd)
+static char	*u_toa(unsigned int n)
 {
-	if (n < 10)
-		ft_putchar_fd(n + '0', fd);
-	else
+	char	*str;
+	int		index;
+
+	index = how_much(n);
+	str = ft_calloc(index + 1, sizeof (char));
+	if (str == NULL)
+		return (NULL);
+	index--;
+	if (n == 0)
+		str[0] = '0';
+	while (n != 0)
 	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
+		str[index] = (n % 10) + '0';
+		n = n / 10;
+		index--;
 	}
+	return (str);
 }
 
-int	print_unsigned(unsigned int n, int fd)
+int	print_unsigned(unsigned int n)
 {
-	int	count;
+	int		count;
+	char	*nbr;
 
-	count = howmuch(n);
-	change_nbr(n, fd);
+	count = -1;
+	nbr = u_toa(n);
+	if (nbr != NULL)
+	{
+		count = write (1, nbr, ft_strlen(nbr));
+		free (nbr);
+	}
 	return (count);
 }

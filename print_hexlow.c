@@ -6,21 +6,19 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/21 18:54:57 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/24 13:23:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2022/12/05 13:58:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	howmuch(unsigned int a)
+static int	how_much(unsigned int a)
 {
 	int	i;
 
 	i = 0;
 	if (a == 0)
-	{
 		i++;
-	}
 	while (a != 0)
 	{
 		a = a / 16;
@@ -29,30 +27,43 @@ static int	howmuch(unsigned int a)
 	return (i);
 }
 
-static int	put_hexlow(unsigned int n)
+static char	*hex_toa(unsigned int n)
 {
-	if ((n / 16) != 0)
-		put_hexlow(n / 16);
-	if ((n % 16) < 10)
+	char	*str;
+	int		index;
+	int		mod;
+
+	index = how_much(n);
+	str = ft_calloc(index + 1, sizeof (char));
+	if (str == NULL)
+		return (NULL);
+	index--;
+	if (n == 0)
+		str[0] = '0';
+	while (n != 0)
 	{
-		print_char((n % 16) + 48);
+		mod = n % 16;
+		if (mod < 10)
+			str[index] = mod + '0';
+		else
+			str[index] = (mod - 10) + 'a';
+		n = n / 16;
+		index--;
 	}
-	else
-	{
-		print_char((n % 16) + 87);
-	}
-	return (n);
+	return (str);
 }
 
 int	print_hexlow(unsigned int n)
 {
-	int	count;
+	int		count;
+	char	*nbr;
 
-	count = howmuch(n);
-	put_hexlow(n);
+	count = -1;
+	nbr = hex_toa(n);
+	if (nbr)
+	{
+		count = write(1, nbr, ft_strlen(nbr));
+		free (nbr);
+	}
 	return (count);
 }
-
-/*
-why do i get LONG max/min errors when i put long in the function and now i don't?
-*/

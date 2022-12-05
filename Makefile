@@ -6,7 +6,7 @@
 #    By: dreijans <dreijans@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/15 18:56:16 by dreijans      #+#    #+#                  #
-#    Updated: 2022/11/24 13:23:58 by dreijans      ########   odam.nl          #
+#    Updated: 2022/12/05 12:07:45 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,13 @@ print_hexlow.c \
 print_hexup.c \
 print_str.c \
 print_unsigned.c \
-print_pointer.c 
+print_ptr.c 
 OBJ_FILES = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 LIB = $(LIBDIR)/libft.a
 LIBDIR = Libft
 
-.PHONY: all clear fclean re test
+.PHONY: all clear fclean re
 
 all: $(NAME)
 
@@ -51,8 +51,6 @@ fclean:
 
 re: fclean all
 
-test: re 
-		gcc *.c -g $(NAME)
-		./a.out
-
-# cp als eerst anders copy paste je over je created libftprintf.a file 
+test: re
+	gcc -g *.c $(NAME)
+	./a.out

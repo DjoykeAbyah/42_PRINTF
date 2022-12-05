@@ -6,12 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/18 17:51:42 by dreijans      #+#    #+#                 */
-/*   Updated: 2022/11/24 13:17:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2022/12/05 14:00:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
@@ -25,8 +26,7 @@ int	main(void)
 	ft_printf("count mine: %i\n", ft_printf("%c\n", d));
 	printf("---------------------\n");
 	printf("test string\n");
-	char *str;
-	str = "nice";
+	void *str;
 	printf("original: %s\n", str);
 	ft_printf("mine: %s\n", str);
 	printf("count original: %i\n", printf("%s\n", str));
@@ -54,11 +54,11 @@ int	main(void)
 	printf("---------------------\n");
 	printf("test hexlower\n");
 	int b;
-	b = 456767;
-	printf("original: %x\n", b);
-	ft_printf("mine: %x\n", b);
-	printf("count original: %i\n", printf("%x\n", b));
-	ft_printf("count mine: %i\n", ft_printf("%x\n", b));
+	// b = 2147483630 * 3;
+	b = printf("orig: %x\n", ULONG_MAX);
+	printf("count original: %i\n", b);
+	b = ft_printf("mine: %x\n", ULONG_MAX);
+	ft_printf("count mine: %i\n", b);
 	printf("---------------------\n");
 	printf("test hexupper\n");
 	int c;
@@ -102,8 +102,6 @@ int	main(void)
 	ft_printf(" NULL %s NULL ", NULL);
 	ft_printf("count mine: %i\n", ft_printf(" NULL %s NULL ", NULL));
 	printf("\n---------------------\n");
-
-	
 	printf("test francinette pointer\n");
 	printf(" %p %p ", 0, 0);
 	printf("count original: %i\n", printf(" %p %p ", 0, 0));
@@ -111,8 +109,6 @@ int	main(void)
 	ft_printf(" %p %p ", 0, 0);
 	ft_printf("count mine: %i\n", ft_printf(" %p %p ", 0, 0));
 	printf("\n---------------------\n");
-
-	
 	printf("test francinette pointer\n");
 	printf("%p", NULL);
 	printf("count original: %i\n", printf("%p", NULL));
@@ -120,11 +116,20 @@ int	main(void)
 	ft_printf("%p", NULL);
 	ft_printf("count mine: %i\n", ft_printf("%p", NULL));
 	printf("\n---------------------\n");
-
 	printf("test francinette hexlow\n");
 	printf(" %x ", 9223372036854775807);
 	printf("count original: %i\n", printf(" %x ", 9223372036854775807));
 	ft_printf(" %x ", 9223372036854775807);
 	ft_printf("count mine: %i\n", ft_printf(" %x ", 9223372036854775807));
-	
+	printf("\n---------------------\n");
+	printf("test cosima\n");
+	ft_printf("\ncount mine: %i\n", ft_printf("test: %%%"));
+	printf("\ncount original: %i\n", printf("test: %%%"));
+	printf("end test cosima\n");
+	printf("\n---------------------\n");
+	ft_printf("NULL");
+	printf("NULL");
+	printf("\n---------------------\n");
+	ft_printf("\ncount mine: %i\n", ft_printf("test: %%%hhh"));
+	printf("\ncount original: %i\n", printf("test: %%%hhh"));
 }
