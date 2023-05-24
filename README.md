@@ -20,3 +20,16 @@ Through this assignment, I had the opportunity to explore and master the followi
 - Programming skills improvement 💪
 - Variadic functions in C 🌟
 - Code structure and extensibility 🏗️
+
+## Installation
+1. Clone the repository or download the source code files.
+2. Compile the program using the provided Makefile by simply running:
+
+```$ make```
+
+
+## Usage
+run the following command to execute:
+
+```$ make test```
+
