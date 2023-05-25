@@ -29,7 +29,7 @@ Through this assignment, I had the opportunity to explore and master the followi
 
 
 ## Usage
-run the following command to execute:
+Run the following command to execute:
 
 ```$ make test```
 
